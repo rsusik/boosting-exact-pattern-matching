@@ -74,16 +74,15 @@ def run_tests(r=100, algos:List[str]=None, datasets:List[str]=None, dataset_path
             algos.append(filename)
 
     results = PersistentResults(
-        f'results-r{r}.pickle',    # do jakiego pliku zapisywac
+        f'dataset-raw.pickle',    # do jakiego pliku zapisywac
         interval=r,    # co x wzorców
-        tmpfilename=f'~results-r{r}.pickle',
+        tmpfilename=f'~dataset-raw.pickle',
         result_prefix=''
     )
 
     for dataset in datasets:
         print(f'Testing {dataset}')
         patterns = pickle.load(open(f'{dataset}-r{r}.patterns', 'rb'))
-        # patterns.append('ABCDE1234')
         dataset = get_tmp_dataset_name(dataset_path, dataset)
         s = open(f'{dataset}', 'rb').read()
         n = len(s)

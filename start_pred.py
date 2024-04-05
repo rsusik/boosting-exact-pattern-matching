@@ -18,7 +18,7 @@ from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.multioutput import MultiOutputRegressor
 import pickle
 import xgboost as xgb
-import catboost as cat
+# import catboost as cat
 from tqdm import tqdm
 
 
@@ -52,8 +52,8 @@ def get_hgb(**kwargs):
 def get_xgb(**kwargs):
     return xgb.XGBRegressor(**get_supported_kwargs(xgb.XGBRegressor, kwargs))
 
-def get_cat(**kwargs):
-    return cat.CatBoostRegressor(loss_function='MultiRMSE', eval_metric='MultiRMSE', **get_supported_kwargs(cat.CatBoostRegressor, kwargs))
+# def get_cat(**kwargs):
+#     return cat.CatBoostRegressor(loss_function='MultiRMSE', eval_metric='MultiRMSE', **get_supported_kwargs(cat.CatBoostRegressor, kwargs))
 
 def normalize_row(row, n_top):
     row = row.copy()
