@@ -39,9 +39,17 @@ The experiment consists of two parts.
 
 ## To reproduce the results
 
-1) Clone the repository `git clone https://github.com/rsusik/boosting-exact-pattern-matching.git`.
+1) Clone the repository 
    
-2) Install required packages by running `pip install -r requirements.txt`.
+   ```bash
+   git clone https://github.com/rsusik/boosting-exact-pattern-matching.git
+   ```
+   
+2) Install required packages by running 
+   
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 3) Download the `*.pickle` files from the links above and place them in the root directory of the repository.
 
