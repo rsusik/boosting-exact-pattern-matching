@@ -39,11 +39,32 @@ The experiment consists of two parts.
 
 ## To reproduce the results
 
-1) Clone the repository. `git clone https://github.com/rsusik/boosting-exact-pattern-matching.git`
-2) Download the `*.pickle` files from the links above and place them in the root directory of the repository.
-3) Run `start_pred.py` script.
+1) Clone the repository `git clone https://github.com/rsusik/boosting-exact-pattern-matching.git`.
+   
+2) Install required packages by running `pip install -r requirements.txt`.
+
+3) Download the `*.pickle` files from the links above and place them in the root directory of the repository.
+
+4) Run `start_pred.py` script.
 
 *The results may differ in prediction times slightly due to the hardware differences, but the impact on the overall results should be negligible.*
+
+## To create the dataset from scratch
+
+Perform step 1 and 2 from the previous section and then:
+
+3) Download the text corpus from [Pizza&Chilli](https://pizzachili.dcc.uchile.cl/texts.html) (the tests were performed on 50MB texts) and place it in the `data` directory.
+
+4) Execute searching algorithms to create the dataset:
+   
+   ```bash
+   cd smart
+   python compile.py
+   cd ..
+   python run_tests.py
+   ```
+
+*Running the searching algorithms may take a long time and lead to slightly different results due to the hardware differences.*
 
 ## Authors
 
