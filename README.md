@@ -4,6 +4,12 @@
 
 This repository contains datasets and source code for the paper *"Boosting exact pattern matching with eXtreme Gradient Boosting (and more)"*.
 
+## Dataset for ML
+
+For those who want to perform the research on our dataset, we provide it in convenient json format in [dataset_ml_json](dataset_ml_json) folder.
+
+To reproduce our results, please follow the instructions below.
+
 ## Contents
 
 The experiment consists of two parts.
@@ -15,9 +21,9 @@ The experiment consists of two parts.
    - 📄 `utils.py` - contains helper functions
    - 📄 `dataset-raw.pickle` - contains raw datasets with pattern searching times for all algorithms
 
-2. The second part is to prepare the dataset for machine learning and train machine learning models whose task is to predict the fastest algorithm for a given pattern.
+2. The second part is to prepare the dataset for machine learning and train models to predict the fastest algorithm for a given pattern.
    - 📄 `start_pred.py` - runs the tests (trainings and predictions)
-   - 📄 `datautils.py` - contains helper functions to process the data
+   - 📄 `datautils.py` - contains helper functions
    - 📄 `dataset-full.pickle` - processed dataset, prepared for machine learning
    - 📔 `dataset-full-notebook.ipynb` - jupyter notebook with results of exact pattern matching algorithms
    - 📄 `train_datasets.pickle` - train dataset
@@ -27,8 +33,8 @@ The experiment consists of two parts.
 
 
 **Note:** `*.pickle` files are not included in the repository. They can be downloaded from:
-* [datasets](https://tulodz-my.sharepoint.com/:u:/g/personal/robert_susik_p_lodz_pl/ETFKSB8gCIhOkZv1rP7iWy4BfM0DdcSyDdyN0ZO6KTc2ZA?e=mlXKxW)
-* [models](https://tulodz-my.sharepoint.com/:u:/g/personal/robert_susik_p_lodz_pl/EXt7LShDGgdMguzSM0yfJJYBRqr634XZIadhR5oYmmuxPw?e=hAtbCS)
+* [datasets](https://tulodz-my.sharepoint.com/:u:/g/personal/robert_susik_p_lodz_pl/ESWnEWdN0MFPldZgqmjljHwBlbVuylqQzHsf91YFZ2fPuw?e=L2Ovh3)
+* [models](https://tulodz-my.sharepoint.com/:u:/g/personal/robert_susik_p_lodz_pl/ESAuixQRzZBKslk3w4ZshmkBioxYgLwxwhO44W3XQcGIsw?e=hhdzUN)
 
 **Note 2:** The text corpus is also not included in the repository. It can be downloaded from [Pizza&Chilli](https://pizzachili.dcc.uchile.cl/texts.html) (the tests were performed on 50MB texts) and then placed in the `data` directory.
 

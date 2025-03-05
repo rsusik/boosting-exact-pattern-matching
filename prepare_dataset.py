@@ -15,6 +15,10 @@ tqdm.pandas()
 # Config
 algorithms = ['bf', 'kr', 'qs', 'nsn', 'smith', 'rcolussi', 'askip', 'br', 'fs', 'ffs', 'bfs', 'ts', 'ssabs', 'hash3', 'hash5', 'hash8', 'aut', 'rf', 'bom', 'bom2', 'ildm1', 'ildm2', 'ebom', 'fbom', 'sebom', 'sfbom', 'so', 'sa', 'bndm', 'bndml', 'sbndm', 'sbndm2', 'sbndm-bmh', 'faoso2', 'aoso2', 'aoso4', 'fsbndm', 'bndmq2', 'bndmq4', 'bndmq6', 'sbndmq2', 'sbndmq4', 'sbndmq6', 'sbndmq8', 'ufndmq4', 'ufndmq6', 'ufndmq8']
 
+train_test_ratio = 0.8
+number_of_train_samples = int(1000 * train_test_ratio)
+number_of_test_samples = 1000 - number_of_train_samples
+
 alg_name_to_id = {}
 for idx, alg in enumerate(algorithms):
     alg_name_to_id[alg] = idx
@@ -63,7 +67,7 @@ df2 = tmp
 
 
 # %%
-# Dataset split - 500 train, 500 test
+# Dataset split
 
 df_bf = df[df['algorithm'] == 'bf']
 df_bf_filtered = (df_bf.groupby('pattern').count() > 1)['m'].reset_index()
@@ -82,8 +86,8 @@ for dataset, group in tqdm(df2.groupby('dataset')):
         uniq_patterns = group2['pattern'].unique()
         assert len(uniq_patterns)==1000, 'Cos poszlo nie tak'
         random.shuffle(uniq_patterns)
-        train_patterns = uniq_patterns[:500].tolist()
-        test_patterns = uniq_patterns[500:].tolist()
+        train_patterns = uniq_patterns[:number_of_train_samples].tolist()
+        test_patterns = uniq_patterns[number_of_train_samples:].tolist()
         # if there is a duplicate in test set, then swap it with non-duplicate from train set
         # to ensure there are no duplicate entries shared by test and train sets
         list_to_move_to_train = []
@@ -102,14 +106,14 @@ for dataset, group in tqdm(df2.groupby('dataset')):
                     el2 not in test_patterns
                 ):
                     # next, find element in train set which is not a duplicate and move it to test set
-                    print('found not duplicate element in train set, moving to test set')
+                    print('found unique (not duplicate) element in train set, moving to test set')
                     test_patterns.append(el2)
                     train_patterns.remove(el2)
                     break
             print()
 
-        assert len(train_patterns) == 500, 'len(train_patterns) != 500'
-        assert len(test_patterns) == 500, 'len(test_patterns) != 500'
+        assert len(train_patterns) == number_of_train_samples, f'len(train_patterns)({len(train_patterns)}) != {number_of_train_samples}'
+        assert len(test_patterns) == number_of_test_samples, f'len(test_patterns)({len(test_patterns)}) != {number_of_test_samples}'
 
 
         train_records = df[df['pattern'].isin(train_patterns)&(df['dataset']==dataset)&(df['m']==m)]
@@ -122,15 +126,16 @@ assert len(set(test_patterns).intersection(set(train_patterns))) == 0, 'test i t
 ttr = train_df.groupby(['dataset', 'm']).count()[train_df.groupby(['dataset', 'm']).count().columns[0]]
 tts = test_df.groupby(['dataset', 'm']).count()[test_df.groupby(['dataset', 'm']).count().columns[0]]
 
-error_occured = False
-for x in zip(list(zip(ttr.to_dict().keys(), ttr.to_dict().values())), list(zip(tts.to_dict().keys(), tts.to_dict().values()))):
-    if x[0][1] != x[1][1]:
-        error_occured = True
-        print(x[0][0], x[0][1], x[1][1])
+# # Check if the number of elements in train and test sets is the same (only for 0.5 ratio)
+# error_occured = False
+# for x in zip(list(zip(ttr.to_dict().keys(), ttr.to_dict().values())), list(zip(tts.to_dict().keys(), tts.to_dict().values()))):
+#     if x[0][1] != x[1][1]:
+#         error_occured = True
+#         print(x[0][0], x[0][1], x[1][1])
 
-if error_occured:
-    print('ERROR: Some groups have different number of elements in train and test sets')
-    exit(1)
+# if error_occured:
+#     print('ERROR: Some groups have different number of elements in train and test sets')
+#     exit(1)
 
 
 # %%
