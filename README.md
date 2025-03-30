@@ -4,6 +4,25 @@
 
 This repository contains datasets and source code for the paper *"Boosting exact pattern matching with eXtreme Gradient Boosting (and more)"*.
 
+## Citation
+
+```bibtex
+@article{SG2025,
+  author = {Susik, Robert and Grabowski, Szymon},
+  year = {2025},
+  month = {March},
+  day = {29},
+  title = {Boosting exact pattern matching with extreme gradient boosting (and more)},
+  journal = {The Journal of Supercomputing},
+  volume = {81},
+  number = {5},
+  pages = {673},
+  issn = {1573-0484},
+  doi = {10.1007/s11227-025-07165-2},
+  url = {https://doi.org/10.1007/s11227-025-07165-2}
+}
+```
+
 ## Dataset for ML
 
 For those who want to perform the research on our dataset, we provide it in convenient json format in [dataset_ml_json](dataset_ml_json) folder.
@@ -165,8 +184,3 @@ Perform step 1 and 2 from the previous section and then:
 | 78 | zt | [source](https://github.com/rsusik/boosting-exact-pattern-matching/tree/main/smart/source/algos/zt.c) |
 
 
-
-## Authors
-
-- Robert Susik
-- Szymon Grabowski
